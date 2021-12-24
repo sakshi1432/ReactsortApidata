@@ -1,0 +1,56 @@
+import React,{useState,useEffect} from 'react'
+
+function App() {
+  const [data,setData] = useState([]);
+  let  citrus = data.slice(0, 10);
+  let newCitrus = data.slice(11,30);
+
+  let [m,setM] = useState([]);
+
+  useEffect(() =>{
+    const dat = async () =>{
+      let url = `https://jsonplaceholder.typicode.com/posts`;
+      const response = await fetch(url);
+      const resjson = await response.json();
+      setData(resjson);
+      setM(citrus);
+    }
+    dat();
+  },[]);
+  
+     const n = () =>{
+      alert(`hellow`);
+      setM(newCitrus);
+     }
+  return (
+    <div className="App">
+      <h1>Hello CodeSandbox</h1>
+      <table>
+  <tr>
+    <th>Company</th>
+    <th>Contact</th>
+  </tr>
+    {
+      m.map((elem) =>{
+        return(
+          <>
+              <tr>
+              <td>{elem.id}</td>
+              <td>{elem.title}</td>
+              
+              </tr>
+          </>
+        )
+      })
+    }
+</table>
+      <button onClick = {n}>Click Me</button>
+
+    </div>
+  );
+
+    
+  
+}
+
+export default App
